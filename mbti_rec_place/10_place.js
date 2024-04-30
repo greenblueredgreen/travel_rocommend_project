@@ -181,7 +181,7 @@ const istj_places = [
     },
     { 
         name: "경기도 한국민속촌", 
-        image: "images/KoreanFolk Village_gyeonggi-do_istj.jpg" 
+        image: "images/KoreanFolk_Village_gyeonggido_istj.jpg" 
     },
     { 
         name: "서울 북촌 한옥마을", 
@@ -211,7 +211,7 @@ const istj_places = [
 const isfj_places = [
     { 
         name: "부산 해운대", 
-        image: "images/Haeundae_busan_isfj.png" 
+        image: "images/busan_haeundae.jpg" 
     },
     { 
         name: "전주 한옥마을", 
@@ -219,7 +219,7 @@ const isfj_places = [
     },
     { 
         name: "강원도 속초해변", 
-        image: "images/SOKCHO BEACH_Gangwondo_isfj.jpg" 
+        image: "images/SOKCHO_BEACH_Gangwondo_isfj.jpg" 
     },
     { 
         name: "서울 국립중앙박물관", 
@@ -227,7 +227,7 @@ const isfj_places = [
     },
     { 
         name: "경상도 경주 월드", 
-        image: "images/Gyeongju World_isfj.jpg" 
+        image: "images/Gyeongju_World_isfj.jpg" 
     },
     { 
         name: "강원도 주문진해변", 
@@ -269,7 +269,7 @@ const istp_places = [
     },
     { 
         name: "서울 어린이대공원", 
-        image: "images/Children'sGrandPark_seoul_istp.jpg" 
+        image: "images/Children_GrandPark_seoul_istp.jpg" 
     },
     { 
         name: "인천 차이나타운", 
@@ -285,7 +285,7 @@ const istp_places = [
     },
     { 
         name: "강원도 오션월드", 
-        image: "images/Ocean World_Gangwon_do_istp.jpg" 
+        image: "images/Ocean_World_Gangwon_do_istp.jpg" 
     },
     { 
         name: "서울 전쟁기념관", 
@@ -334,7 +334,6 @@ const isfp_places = [
         image: "images/seoulMuseumofArt_seoul_isfp.jpg" 
     }
 ];
-//안녕
 const estj_places = [
     { 
         name: "가평빠지", 
@@ -342,7 +341,7 @@ const estj_places = [
     },
     { 
         name: "경복궁", 
-        image: "images/경복궁-ESTJ.png" 
+        image: "images/경복궁.jpg" 
     },
     { 
         name: "경주", 
@@ -354,7 +353,7 @@ const estj_places = [
     },
     { 
         name: "남이섬", 
-        image: "images/남이섬-ESTJ.png" 
+        image: "images/gapyeong_namisum.jpg" 
     },
     { 
         name: "남한산성", 
@@ -388,11 +387,11 @@ const estp_places = [
     },
     { 
         name: "부산해운대", 
-        image: "images/부산해운대-ESTP.png" 
+        image: "images/busan_haeundae.jpg" 
     },
     { 
-        name: "양양", 
-        image: "images/양양-ESTP.png" 
+        name: "양양 서핑비치", 
+        image: "images/yangyang_surfing_beach.jpg" 
     },
     { 
         name: "이태원신흥시장", 
@@ -434,7 +433,7 @@ const esfj_places = [
     },
     { 
         name: "경복궁", 
-        image: "images/경복궁-ESFJ.png" 
+        image: "images/경복궁.jpg" 
     },
     { 
         name: "제주오름등반", 
@@ -464,11 +463,11 @@ const esfj_places = [
 const esfp_places = [
     { 
         name: "부산 해운대 해수욕장", 
-        image: "images/부산해운대-ESFP.png" 
+        image: "images/busan_haeundae.jpg" 
     },
     { 
         name: "남이섬", 
-        image: "images/남이섬-ESFP.png" 
+        image: "images/gapyeong_namisum.jpg" 
     },
     { 
         name: "여수", 
