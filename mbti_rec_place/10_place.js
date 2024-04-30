@@ -335,6 +335,175 @@ const isfp_places = [
     }
 ];
 //안녕
+const estj_places = [
+    { 
+        name: "가평빠지", 
+        image: "images/가평빠지-ESTJ.png" 
+    },
+    { 
+        name: "경복궁", 
+        image: "images/경복궁-ESTJ.png" 
+    },
+    { 
+        name: "경주", 
+        image: "images/경주-ESTJ.png" 
+    },
+    { 
+        name: "국립현대미술관", 
+        image: "images/국립현대미술관-ESTJ.png" 
+    },
+    { 
+        name: "남이섬", 
+        image: "images/남이섬-ESTJ.png" 
+    },
+    { 
+        name: "남한산성", 
+        image: "images/남한산성-ESTJ.png"
+    },
+    { 
+        name: "리움미술관", 
+        image: "images/리움미술관-ESTJ.png"
+    },
+    { 
+        name: "온양온천", 
+        image: "images/온양온천-ESTJ.png"
+    },
+    { 
+        name: "진해", 
+        image: "images/진해-ESTJ.png"
+    },
+    { 
+        name: "화성행궁", 
+        image: "images/화성행궁-ESTJ.png"
+    }
+];
+const estp_places = [
+    { 
+        name: "롯데월드", 
+        image: "images/롯데월드-ESTP.png" 
+    },
+    { 
+        name: "단양패러글라이딩", 
+        image: "images/단양-ESTP.png" 
+    },
+    { 
+        name: "부산해운대", 
+        image: "images/부산해운대-ESTP.png" 
+    },
+    { 
+        name: "양양", 
+        image: "images/양양-ESTP.png" 
+    },
+    { 
+        name: "이태원신흥시장", 
+        image: "images/이태원-ESTP.png" 
+    },
+    { 
+        name: "안동하회마을", 
+        image: "images/안동-ESTP.png"
+    },
+    { 
+        name: "홍천스카이워크", 
+        image: "images/홍천-ESTP.png" 
+    },
+    { 
+        name: "대관령양떼목장", 
+        image: "images/대관령양떼목장-ESTP.png"
+    },
+    { 
+        name: "청계천", 
+        image: "images/청계천-ESTP.png" 
+    },
+    { 
+        name: "속초해변", 
+        image: "images/속초-ESTP.png"
+    }
+];
+const esfj_places = [
+    { 
+        name: "경주불국사", 
+        image: "images/경주불국사-ESFJ.png" 
+    },
+    { 
+        name: "남산서울타워", 
+        image: "images/남산서울타워-ESFJ.png" 
+    },
+    { 
+        name: "보성녹차밭", 
+        image: "images/보성녹차밭-ESFJ.png" 
+    },
+    { 
+        name: "경복궁", 
+        image: "images/경복궁-ESFJ.png" 
+    },
+    { 
+        name: "제주오름등반", 
+        image: "images/제주오름-ESFJ.png" 
+    },
+    { 
+        name: "설악산", 
+        image: "images/설악산-ESFJ.png" 
+    },
+    { 
+        name: "인사동", 
+        image: "images/인사동-ESFJ.png"
+    },
+    { 
+        name: "공주공산성", 
+        image: "images/공주공산성-ESFJ.png"
+    },
+    { 
+        name: "문경새재", 
+        image: "images/문경새재-ESFJ.png"
+    },
+    { 
+        name: "부산국제시장", 
+        image: "images/부산국제시장-ESFJ.png" 
+    }
+];
+const esfp_places = [
+    { 
+        name: "부산 해운대 해수욕장", 
+        image: "images/부산해운대-ESFP.png" 
+    },
+    { 
+        name: "남이섬", 
+        image: "images/남이섬-ESFP.png" 
+    },
+    { 
+        name: "여수", 
+        image: "images/여수-ESFP.png" 
+    },
+    { 
+        name: "제주도", 
+        image: "images/제주도-ESFP.png" 
+    },
+    { 
+        name: "강릉경포대", 
+        image: "images/경포대-ESFP.png"
+    },
+    { 
+        name: "인천월미도", 
+        image: "images/월미도-ESFP.png" 
+    },
+    { 
+        name: "홍대", 
+        image: "images/홍대-ESFP.png"
+    },
+    { 
+        name: "전주한옥마을", 
+        image: "images/전주한옥마을-ESFP.png"
+    },
+    { 
+        name: "포항호미곶", 
+        image: "images/호미곶-ESFP.png"
+    },
+    { 
+        name: "혜화", 
+        image: "images/혜화-ESFP.png"
+    }
+];
+
 
 console.log("INTP에게 추천할 국내 여행지와 관광지:");
 infj_places.forEach(place => {
