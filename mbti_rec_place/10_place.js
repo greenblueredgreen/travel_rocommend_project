@@ -334,6 +334,7 @@ const isfp_places = [
         image: "images/seoulMuseumofArt_seoul_isfp.jpg" 
     }
 ];
+//안녕
 
 console.log("INTP에게 추천할 국내 여행지와 관광지:");
 infj_places.forEach(place => {
