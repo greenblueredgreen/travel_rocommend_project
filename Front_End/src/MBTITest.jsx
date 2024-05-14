@@ -14,6 +14,8 @@ import {
   esfp_places,
 } from './10_place.js';
 
+import KakaoLoginButton from './KakaoLoginButton.jsx';
+
 const questions = [
   { question: '여행지에서 새로운 사람들과 만나는 것을 즐기시나요?', type: 'EI' },
   { question: '여행 중 혼자만의 시간을 갖는 것이 꼭 필요하다고 생각하시나요?', type: 'EI' },
@@ -113,8 +115,6 @@ const MBTITest = () => {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
-        <h2>MBTI 여행 성향 테스트 결과</h2>
-        <p>당신의 MBTI 유형은 {mbtiResult}입니다.</p>
         {recommendedPlace && (
           <div>
             <h3>추천 여행지: {recommendedPlace.name}</h3>
@@ -123,7 +123,10 @@ const MBTITest = () => {
             )}
           </div>
         )}
-        <button onClick={resetTest}>다시 테스트하기</button>
+        <div style={{ display: 'flex', justifyContent: 'space-around', width: '200px' }}>
+          <button onClick={resetTest}>다시 테스트하기</button>
+          <KakaoLoginButton />
+        </div>
       </div>
     );
   }
