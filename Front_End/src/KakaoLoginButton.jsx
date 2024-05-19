@@ -1,6 +1,7 @@
 import React from 'react';
 import KakaoLogin from 'react-kakao-login';
 import axios from 'axios';
+import './MBTITest.css';
 
 const KakaoLoginButton = () => {
   const kakaoClientId = '2cb00a30f455e32e215271404e61327e';
@@ -27,14 +28,18 @@ const KakaoLoginButton = () => {
   };
 
   return (
-    <KakaoLogin
-      token={kakaoClientId}
-      onSuccess={handleLoginSuccess}
-      onFail={handleLoginFailure}
-      render={({ onClick }) => (
-        <button onClick={onClick}>카카오로 회원가입/로그인</button>
-      )}
-    />
+    <div className="kakao-login-button-wrapper">
+      <KakaoLogin
+        token={kakaoClientId}
+        onSuccess={handleLoginSuccess}
+        onFail={handleLoginFailure}
+        render={({ onClick }) => (
+          <button className="kakao-login-button" onClick={onClick}>
+            카카오톡으로 회원가입
+          </button>
+        )}
+      />
+    </div>
   );
 };
 
