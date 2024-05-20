@@ -1,0 +1,1 @@
+<h1 className="user-page">회원가입후 페이지</h1>

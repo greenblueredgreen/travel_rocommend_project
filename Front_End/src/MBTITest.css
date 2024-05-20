@@ -86,7 +86,8 @@
 
 .mbti-test-recommended-place {
   text-align: center;
-  margin-bottom: 2rem;
+  width: 100%;
+  margin-bottom: 1rem;
 }
 
 .mbti-test-place-name {
@@ -95,9 +96,11 @@
 }
 
 .mbti-test-place-image {
-  max-width: 100%;
+  width: 100%;
   height: auto;
-  border-radius: 10px;
+  max-width: 500px;
+  max-height: 300px;
+  object-fit: cover;
 }
 
 .mbti-test-result-buttons {

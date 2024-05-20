@@ -8,18 +8,29 @@ const KakaoLoginButton = () => {
 
   const handleLoginSuccess = async (response) => {
     const { access_token } = response;
+
     try {
       const userResponse = await axios.get('https://kapi.kakao.com/v2/user/me', {
         headers: {
           Authorization: `Bearer ${access_token}`,
         },
       });
+
       const userId = userResponse.data.id;
-      // 서버에 회원가입 또는 로그인 처리 로직 구현
-      // userId를 사용하여 회원 정보 저장 또는 로그인 상태 설정
-      console.log('회원가입/로그인 성공', userId);
+      const userEmail = userResponse.data.kakao_account.email;
+      const userNickname = userResponse.data.properties.nickname;
+
+      // 서버에 회원가입 처리 로직 구현
+      const signupResponse = await axios.post('/api/signup', {
+        userId,
+        userEmail,
+        userNickname,
+      });
+
+      console.log('회원가입 성공', signupResponse.data);
+      
     } catch (error) {
-      console.error('회원가입/로그인 실패', error);
+      console.error('회원가입 실패', error);
     }
   };
 

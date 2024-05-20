@@ -134,10 +134,10 @@ const MBTITest = () => {
   } else {
     return (
       <div className="mbti-test-result-container">
-        <h2 className="mbti-test-result-title">당신의 MBTI 유형은 {mbtiResult}입니다.</h2>
+        <h2 className="mbti-test-result-title">당신의 MBTI 유형은 {mbtiResult}입니다!</h2>
         {recommendedPlace && (
           <div className="mbti-test-recommended-place">
-            <h3 className="mbti-test-place-name">추천 여행지: {recommendedPlace.name}</h3>
+            <h3 className="mbti-test-place-name">추천 여행지 : {recommendedPlace.name}</h3>
             {recommendedPlace.image && (
               <img className="mbti-test-place-image" src={recommendedPlace.image} alt={recommendedPlace.name} />
             )}
