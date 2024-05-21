@@ -13,6 +13,10 @@ import {
   estp_places,
   esfj_places,
   esfp_places,
+  enfj_places,
+  entj_places,
+  entp_places,
+  enfp_places
 } from './10_place.js';
 
 import KakaoLoginButton from './KakaoLoginButton.jsx';
@@ -47,6 +51,10 @@ const mbtiPlaces = {
   ESTP: estp_places,
   ESFJ: esfj_places,
   ESFP: esfp_places,
+  ENFP: enfj_places,
+  ENTP: entp_places,
+  ENFJ: enfj_places,
+  ENTJ: entj_places
 };
 
 const shuffleArray = (array) => {
