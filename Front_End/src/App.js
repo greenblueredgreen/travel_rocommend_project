@@ -1,16 +1,21 @@
-// App.js
 import React from "react";
-import MBTITest from "./MBTITest"; // MBTITest 컴포넌트 import
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import MBTITest from "./MBTITest";
+import Signup from "./Signup";
+import Login from "./Login";
+import Main from "./Main";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header"></header>
-      <main>
-        <MBTITest /> {/* MBTITest 컴포넌트 렌더링 */}
-      </main>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<MBTITest />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/main" element={<Main />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
