@@ -1,0 +1,20 @@
+.option-row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .option-card {
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .option-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+  
+  @media (max-width: 575.98px) {
+    .option-row {
+      flex-direction: column;
+    }
+  }

@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./MBTITest.css";
 import {
   infj_places,
   infp_places,
@@ -208,31 +209,26 @@ const MBTITest = () => {
     return <div>Loading...</div>;
   }
 
-  if (
-    currentQuestion >= shuffledQuestions.length ||
-    shuffledQuestions.length === 0
-  ) {
+  if (currentQuestion >= shuffledQuestions.length || shuffledQuestions.length === 0) {
     return (
       <Container className="py-5">
         <Row className="justify-content-center">
-          <Col xs={12} md={8} lg={6}>
+          <Col xs={12} md={10} lg={8}>
             <Card className="shadow">
               <Card.Body className="text-center">
                 <h2 className="mb-4">당신의 MBTI 유형은 {mbtiResult}입니다!</h2>
                 {recommendedPlace && (
                   <div className="mb-4">
                     <h3>추천 여행지 : {recommendedPlace.name}</h3>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        width: "90%",
-                        height: "400px",
-                        overflow: "hidden",
-                        margin: "0 auto",
-                      }}
-                    >
+                    <div style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      width: "100%",
+                      height: "300px",
+                      overflow: "hidden",
+                      margin: "0 auto",
+                    }}>
                       {recommendedPlace.image && (
                         <img
                           src={recommendedPlace.image}
@@ -240,7 +236,7 @@ const MBTITest = () => {
                           style={{
                             maxWidth: "100%",
                             maxHeight: "100%",
-                            objectFit: "contain",
+                            objectFit: "cover",
                           }}
                         />
                       )}
@@ -250,19 +246,14 @@ const MBTITest = () => {
                 <p className="text-muted mt-2">
                   회원가입하여 더 다양한 여행지 추천을 받아보세요!
                 </p>
-
-                <div className="d-flex justify-content-center">
-                  <Button
-                    variant="primary"
-                    onClick={resetTest}
-                    className="me-2"
-                  >
+                <div className="d-flex flex-wrap justify-content-center">
+                  <Button variant="primary" onClick={resetTest} className="m-2">
                     다시 테스트하기
                   </Button>
-                  <Link to="/signup" className="btn btn-success me-2">
+                  <Link to="/signup" className="btn btn-success m-2">
                     회원가입
                   </Link>
-                  <Link to="/login" className="btn btn-outline-primary">
+                  <Link to="/login" className="btn btn-outline-primary m-2">
                     로그인
                   </Link>
                 </div>
@@ -279,22 +270,30 @@ const MBTITest = () => {
   return (
     <Container className="py-5">
       <Row className="justify-content-center">
-        <Col xs={12} md={8} lg={6}>
+        <Col xs={12} md={10} lg={8}>
           <Card className="shadow mb-4">
             <Card.Body>
               <h2 className="text-center mb-4">MBTI별 여행 성향 테스트</h2>
               <p className="text-center mb-4">{currentQ.question}</p>
             </Card.Body>
           </Card>
-          <Row>
+          <Row className="g-4">
             {currentQ.options.map((option, index) => (
-              <Col xs={12} key={index} className="mb-3">
+              <Col xs={12} sm={6} key={index}>
                 <Card
                   className="shadow h-100 option-card"
                   onClick={() => handleAnswer(index)}
-                  style={{ cursor: "pointer" }}
+                  style={{ 
+                    cursor: "pointer",
+                    transition: "all 0.3s ease-in-out",
+                  }}
                 >
-                  <Card.Body className="d-flex align-items-center justify-content-center">
+                  <Card.Body 
+                    className="d-flex align-items-center justify-content-center"
+                    style={{
+                      minHeight: "100px",
+                    }}
+                  >
                     <p className="text-center mb-0">{option}</p>
                   </Card.Body>
                 </Card>
