@@ -247,13 +247,13 @@ const MBTITest = () => {
                   회원가입하여 더 다양한 여행지 추천을 받아보세요!
                 </p>
                 <div className="d-flex flex-wrap justify-content-center">
-                  <Button variant="primary" onClick={resetTest} className="m-2">
+                  <Button onClick={resetTest} className="m-2 me-5 btn-success">
                     다시 테스트하기
                   </Button>
-                  <Link to="/signup" className="btn btn-success m-2">
+                  <Link to="/signup" className="btn btn-primary m-2">
                     회원가입
                   </Link>
-                  <Link to="/login" className="btn btn-outline-primary m-2">
+                  <Link to="/login" className="btn btn-primary m-2">
                     로그인
                   </Link>
                 </div>
@@ -271,10 +271,10 @@ const MBTITest = () => {
     <Container className="py-5">
       <Row className="justify-content-center">
         <Col xs={12} md={10} lg={8}>
+              <h2 className="text-center mb-4">MBTI별 여행 성향 테스트</h2>
           <Card className="shadow mb-4">
             <Card.Body>
-              <h2 className="text-center mb-4">MBTI별 여행 성향 테스트</h2>
-              <p className="text-center mb-4">{currentQ.question}</p>
+              <p className="text-center mb-1">{currentQ.question}</p>
             </Card.Body>
           </Card>
           <Row className="g-4">
