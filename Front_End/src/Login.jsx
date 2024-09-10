@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -13,12 +14,16 @@ const Login = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("로그인 정보:", formData);
-    // 여기에 실제 로그인 로직을 구현합니다.
-    // 성공 시 메인 페이지로 이동
-    navigate("/main");
+    try {
+      const response = await axios.post('/api/users/login', formData);
+      localStorage.setItem('token', response.data);
+      navigate('/main');
+    } catch (error) {
+      console.error('Login failed:', error);
+      // 에러 처리 로직 추가
+    }
   };
 
   return (

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Card, Form, Button, Alert } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -40,9 +41,7 @@ const Signup = () => {
     e.preventDefault();
     if (validateForm()) {
       try {
-        // 여기에 실제 회원가입 API 호출 로직을 구현
-        console.log('회원가입 정보:', formData);
-        // 성공 시 로그인 페이지로 이동
+        await axios.post('/api/users/signup', formData);
         navigate('/login', { state: { message: '회원가입이 완료되었습니다. 로그인해주세요.' } });
       } catch (error) {
         console.error('회원가입 실패:', error);
