@@ -1,5 +1,6 @@
-server: 
+server:
   port: 8080
+
 spring:
   thymeleaf:
     cache: false
@@ -18,5 +19,12 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
 mybatis:
   mapper-locations: mappers/*Mapper.xml
+
+# 네이버 클라우드 플랫폼 Maps API 설정
+naver:
+  cloud:
+    maps:
+      client-id: 0nn0y45wnv
