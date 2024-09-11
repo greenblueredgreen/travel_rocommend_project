@@ -11,6 +11,6 @@ public class UserController {
 
     @GetMapping("/api/hello")
     public String test() {
-        return "Hello, world!";
+        return "드디어 react연동 성공";
     }
 }
