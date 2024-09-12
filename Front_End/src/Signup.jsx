@@ -6,9 +6,9 @@ import axios from 'axios';
 const Signup = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    name: '',
-    gender: '',
-    birthdate: '',
+    // name: '',
+    // gender: '',
+    // birthdate: '',
     email: '',
     password: '',
     confirmPassword: ''
@@ -17,9 +17,9 @@ const Signup = () => {
 
   const validateForm = () => {
     const newErrors = {};
-    if (formData.name.trim().length < 2) newErrors.name = '이름은 2글자 이상이어야 합니다.';
-    if (!formData.gender) newErrors.gender = '성별을 선택해주세요.';
-    if (!formData.birthdate) newErrors.birthdate = '생년월일을 입력해주세요.';
+    // if (formData.name.trim().length < 2) newErrors.name = '이름은 2글자 이상이어야 합니다.';
+    // if (!formData.gender) newErrors.gender = '성별을 선택해주세요.';
+    // if (!formData.birthdate) newErrors.birthdate = '생년월일을 입력해주세요.';
     if (!/^\S+@\S+\.\S+$/.test(formData.email)) newErrors.email = '유효한 이메일 주소를 입력해주세요.';
     if (formData.password.length < 8) newErrors.password = '비밀번호는 8자 이상이어야 합니다.';
     if (formData.password !== formData.confirmPassword) newErrors.confirmPassword = '비밀번호가 일치하지 않습니다.';
@@ -41,7 +41,8 @@ const Signup = () => {
     e.preventDefault();
     if (validateForm()) {
       try {
-        await axios.post('/api/users/signup', formData);
+        const response = await axios.post(`http://localhost:8080/user/sign-up?email=${formData.email}&password=${formData.password}`);
+        console.log('회원가입 성공:', response.data);
         navigate('/login', { state: { message: '회원가입이 완료되었습니다. 로그인해주세요.' } });
       } catch (error) {
         console.error('회원가입 실패:', error);
@@ -49,6 +50,9 @@ const Signup = () => {
       }
     }
   };
+
+
+  
 
   return (
     <Container className="py-5">
@@ -59,7 +63,7 @@ const Signup = () => {
               <h2 className="text-center mb-4">회원가입</h2>
               {errors.submit && <Alert variant="danger">{errors.submit}</Alert>}
               <Form onSubmit={handleSubmit}>
-                <Form.Group className="mb-3">
+                {/* <Form.Group className="mb-3">
                   <Form.Label>이름</Form.Label>
                   <Form.Control
                     type="text"
@@ -95,7 +99,7 @@ const Signup = () => {
                     isInvalid={!!errors.birthdate}
                   />
                   <Form.Control.Feedback type="invalid">{errors.birthdate}</Form.Control.Feedback>
-                </Form.Group>
+                </Form.Group> */}
                 <Form.Group className="mb-3">
                   <Form.Label>이메일 (아이디)</Form.Label>
                   <Form.Control
