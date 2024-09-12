@@ -3,6 +3,7 @@ import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 
+
 const Login = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -10,21 +11,20 @@ const Login = () => {
     password: "",
   });
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+ const handleChange = (e) => {
+ setFormData({ ...formData, [e.target.name]: e.target.value });
+};
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post('/api/users/login', formData);
-      localStorage.setItem('token', response.data);
-      navigate('/main');
-    } catch (error) {
-      console.error('Login failed:', error);
-      // 에러 처리 로직 추가
-    }
-  };
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const response = await axios.post(`http://localhost:8080/user/sign-in?email=${formData.email}&password=${formData.password}`);
+    localStorage.setItem('token', response.data);  // 로그인 성공 시 토큰 저장
+    navigate('/main');  // 메인 페이지로 이동
+  } catch (error) {
+    console.error('Login failed:', error);  // 에러 처리
+  }
+};
 
   return (
     <Container className="py-5">
