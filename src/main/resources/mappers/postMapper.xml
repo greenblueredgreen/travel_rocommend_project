@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.travel.post.mapper.PostMapper">
+	<!-- 글 생성 메소드  -->
+	<insert id="insertPost" parameterType="map">
+		INSERT INTO `post`
+		(
+			`userId`
+			,`userLoginId`
+			,`subject`
+			,`content`
+			,`createdAt`
+			,`updatedAt`
+		)
+		VALUES
+		(
+			#{userId}
+			,#{userLoginId}
+			, #{subject}
+			, #{content}
+			, NOW()
+			, NOW()
+		)
+	</insert>
+</mapper>
