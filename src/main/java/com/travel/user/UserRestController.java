@@ -31,7 +31,7 @@ public class UserRestController {
 	// 회원가입
 	@PostMapping("/sign-up")
 	public Map<String, Object> signUp(
-			@RequestParam("loginId") String loginId, @RequestParam("password") String password) {
+			@RequestParam("email") String loginId, @RequestParam("password") String password) {
 
 		String hashedPassword = EncryptUtils.md5(password);
 
@@ -51,7 +51,8 @@ public class UserRestController {
 
 	// 로그인
 	@PostMapping("/sign-in")
-	public Map<String, Object> signIn(@RequestParam("loginId") String loginId,
+	public Map<String, Object> signIn(
+			@RequestParam("email") String loginId,
 			@RequestParam("password") String password, HttpServletRequest request) {
 
 		// password 해싱
