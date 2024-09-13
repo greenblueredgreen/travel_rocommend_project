@@ -26,7 +26,7 @@ public class PostRestController {
 			@RequestParam("subject") String subject,
 			@RequestParam("content") String content, 
 			HttpSession session) {
-		
+
 		// 글쓴이 번호를 session에서 꺼낸다.
 		int userId = (int)session.getAttribute("userId");
 		String userLoginId = (String)session.getAttribute("userLoginId");
