@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
@@ -15,16 +15,45 @@ const Login = () => {
  setFormData({ ...formData, [e.target.name]: e.target.value });
 };
 
+axios.interceptors.request.use((config) => {
+  const sessionId = localStorage.getItem('sessionId');
+  if (sessionId) {
+    config.headers['Session-Id'] = sessionId; // 요청 헤더에 세션 ID 추가
+  }
+  return config;
+}, (error) => {
+  return Promise.reject(error);
+});
+
 const handleSubmit = async (e) => {
   e.preventDefault();
   try {
     const response = await axios.post(`http://localhost:8080/user/sign-in?email=${formData.email}&password=${formData.password}`);
     localStorage.setItem('token', response.data);  // 로그인 성공 시 토큰 저장
     navigate('/main');  // 메인 페이지로 이동
+ 
+    // 세션 ID를 localStorage에 저장
+    localStorage.setItem('sessionId', response.data.sessionId);
+    navigate('/main');
   } catch (error) {
     console.error('Login failed:', error);  // 에러 처리
   }
 };
+
+useEffect(() => {
+  const sessionId = localStorage.getItem('sessionId');
+  if (!sessionId) {
+    navigate('/login');  // 세션이 없으면 로그인 페이지로 이동
+  }
+}, []);
+
+axios.interceptors.request.use((config) => {
+  const sessionId = localStorage.getItem('sessionId');
+  if (sessionId) {
+    config.headers['Session-Id'] = sessionId;  // 요청 헤더에 세션 ID 추가
+  }
+  return config;
+});
 
   return (
     <Container className="py-5">
