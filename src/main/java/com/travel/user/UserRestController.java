@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -79,5 +77,5 @@ public class UserRestController {
 			result.put("error_message", "회원가입을 먼저 해주세요. 가입되지 않은 사용자입니다.");
 		}
 		return result;
-	}
+	}	
 }

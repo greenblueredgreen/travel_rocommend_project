@@ -25,12 +25,13 @@ public class PostRestController {
 	public Map<String, Object> create(
 			@RequestParam("subject") String subject,
 			@RequestParam("content") String content, 
-			HttpSession session) {
+			@RequestParam("email") String email) {
 
 		// 글쓴이 번호를 session에서 꺼낸다.
-		int userId = (int)session.getAttribute("userId");
-		String userLoginId = (String)session.getAttribute("userLoginId");
-		
+		//int userId = (int)session.getAttribute("userId");
+		String userLoginId = email;
+		int userId = 1;
+	
 		// DB insert
 		// 글쓴이 번호, 로그인 id, 제목, 글내용, 첨부파일
 		postBO.addPost(userId, userLoginId, subject, content);
