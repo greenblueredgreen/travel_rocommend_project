@@ -1,8 +1,12 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
+import { useLocation } from "react-router-dom";
 
 const WritingForm = () => {
+  const location = useLocation();
+  const email = location.state?.email;
+  //alert(email);
   const [subject, setSubject] = useState('');
   const [content, setContent] = useState('');
 
@@ -11,6 +15,7 @@ const WritingForm = () => {
     const params = new URLSearchParams({
       subject: subject,
       content: content,
+      email: email,
     });
 
     try {
@@ -35,7 +40,7 @@ const WritingForm = () => {
       <div className="card">
         <div className="card-body">
           <h1 className="mb-4">글쓰기</h1>
-          
+        
           <div className="row mb-3">
             <div className="col-md-8">
               <input

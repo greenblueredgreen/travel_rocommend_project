@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 
 const Main = () => {
+
   const mapRef = useRef(null);
   const [map, setMap] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
