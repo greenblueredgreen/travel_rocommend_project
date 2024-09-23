@@ -36,7 +36,7 @@ const Login = () => {
       // 로그인 성공 시 토큰 및 세션 ID 저장
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('sessionId', response.data.sessionId);
-
+      localStorage.setItem('email', formData.email);
       //alert(formData.email);
       navigate('/write', { state: { email: formData.email } });
       //navigate('/main');  // 메인 페이지로 이동

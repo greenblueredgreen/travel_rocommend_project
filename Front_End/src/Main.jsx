@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios';
+import "bootstrap/dist/css/bootstrap.min.css";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Main = () => {
-
+  const navigate = useNavigate();
   const mapRef = useRef(null);
   const [map, setMap] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
@@ -49,9 +50,9 @@ const Main = () => {
       const response = await axios.get(`/api/map/search`, {
         params: { query: searchQuery },
         headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        }
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
       });
       const items = response.data.items;
       setPlaces(items);
@@ -68,13 +69,19 @@ const Main = () => {
 
   const searchNearbyPlaces = async (place) => {
     try {
-      const attractionsResponse = await axios.get(`/api/map/nearby?lat=${place.mapx}&lng=${place.mapy}&type=관광지`);
-      const restaurantsResponse = await axios.get(`/api/map/nearby?lat=${place.mapx}&lng=${place.mapy}&type=맛집`);
+      const attractionsResponse = await axios.get(
+        `/api/map/nearby?lat=${place.mapx}&lng=${place.mapy}&type=관광지`
+      );
+      const restaurantsResponse = await axios.get(
+        `/api/map/nearby?lat=${place.mapx}&lng=${place.mapy}&type=맛집`
+      );
 
       setAttractions(attractionsResponse.data.items);
       setRestaurants(restaurantsResponse.data.items);
 
-      displayNearbyPlacesOnMap(attractionsResponse.data.items.concat(restaurantsResponse.data.items));
+      displayNearbyPlacesOnMap(
+        attractionsResponse.data.items.concat(restaurantsResponse.data.items)
+      );
     } catch (error) {
       setError("주변 장소 검색 중 오류가 발생했습니다.");
     }
@@ -128,7 +135,9 @@ const Main = () => {
         icon: {
           content: `<div class="bg-${
             place.category.includes("관광") ? "primary" : "danger"
-          } text-white rounded-circle p-2" style="width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;">${index + 1}</div>`,
+          } text-white rounded-circle p-2" style="width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;">${
+            index + 1
+          }</div>`,
           anchor: new window.naver.maps.Point(15, 15),
         },
       });
@@ -154,16 +163,20 @@ const Main = () => {
   };
 
   return (
-    <div className="container-fluid px-0">
-      <nav className="navbar navbar-light bg-light">
-        <div className="container-fluid">
-          <span className="navbar-brand mb-0 h1">네이버 지도 장소 검색</span>
-        </div>
-      </nav>
+      <div className="container-fluid px-0">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+          <div className="container-fluid">
+            <span className="navbar-brand mb-0 h1">네이버 지도 장소 검색</span>
+            <div className="navbar-nav ms-auto">
+              <button className="btn btn-outline-primary me-2" onClick={() => navigate('/planner')}>플래너</button>
+              <button className="btn btn-outline-secondary" onClick={() => navigate('/mypage')}>마이페이지</button>
+            </div>
+          </div>
+        </nav>
 
       <div className="container mt-3">
         {error && <div className="alert alert-danger">{error}</div>}
-        
+
         <div className="input-group mb-3">
           <input
             type="text"
@@ -172,7 +185,9 @@ const Main = () => {
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="장소를 입력하세요"
           />
-          <button className="btn btn-primary" onClick={searchPlaces}>검색</button>
+          <button className="btn btn-primary" onClick={searchPlaces}>
+            검색
+          </button>
         </div>
 
         <div
@@ -203,7 +218,9 @@ const Main = () => {
                 {attractions.map((attraction, index) => (
                   <li key={index} className="list-group-item">
                     <h6 className="mb-1">{attraction.title}</h6>
-                    <p className="mb-1">{attraction.roadAddress || attraction.address}</p>
+                    <p className="mb-1">
+                      {attraction.roadAddress || attraction.address}
+                    </p>
                     <small>{attraction.category}</small>
                   </li>
                 ))}
@@ -218,7 +235,9 @@ const Main = () => {
                 {restaurants.map((restaurant, index) => (
                   <li key={index} className="list-group-item">
                     <h6 className="mb-1">{restaurant.title}</h6>
-                    <p className="mb-1">{restaurant.roadAddress || restaurant.address}</p>
+                    <p className="mb-1">
+                      {restaurant.roadAddress || restaurant.address}
+                    </p>
                     <small>{restaurant.category}</small>
                   </li>
                 ))}

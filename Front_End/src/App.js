@@ -6,6 +6,7 @@ import Signup from "./Signup";
 import Login from "./Login";
 import Main from "./Main";
 import WritingForm from './WritingForm';
+import MyPage from './MyPage';  // MyPage 컴포넌트 import 추가
 
 const App = () => {
   const [hello, setHello] = useState('');
@@ -24,7 +25,8 @@ const App = () => {
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/main" element={<Main />} />
-          <Route path="/write" element={<WritingForm />} />
+          <Route path="/planner" element={<WritingForm />} />  {/* /write를 /planner로 변경 */}
+          <Route path="/mypage" element={<MyPage />} />  {/* MyPage 라우트 추가 */}
         </Routes>
       </div>
     </Router>
