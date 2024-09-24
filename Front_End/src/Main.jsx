@@ -50,6 +50,7 @@ const Main = () => {
     if (!searchQuery) return;
 
     try {
+      console.log(`Requesting places with query: ${searchQuery}`);
       const response = await axios.get(`/api/map/search`, {
         params: { query: searchQuery }, //// searchQuery를 백엔드로 전달
         headers: {
