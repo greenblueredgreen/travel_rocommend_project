@@ -51,7 +51,7 @@ const Main = () => {
 
     try {
       const response = await axios.get(`/api/map/search`, {
-        params: { query: searchQuery },
+        params: { query: searchQuery }, //// searchQuery를 백엔드로 전달
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
