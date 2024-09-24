@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const MyPage = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const email = location.state?.email; // email 값을 받아오기
+  //alert(email);
   const [userInfo, setUserInfo] = useState({
     email: '',
     // 추후 추가
@@ -55,14 +58,14 @@ const MyPage = () => {
                 <Col sm={3}>
                   <strong>이메일:</strong>
                 </Col>
-                <Col sm={9}>{userInfo.email}</Col>
+                <Col sm={9}>{email}</Col>
               </Row>
               {/* 추후 추가될 수 있는 사용자 정보 필드들 */}
               <div className="d-flex justify-content-between mt-4">
-                <Button variant="outline-primary" onClick={() => navigate('/main')}>
+                <Button variant="outline-primary" onClick={() => navigate('/main', { state: { email: email } })}>
                   홈으로
                 </Button>
-                <Button variant="outline-secondary" onClick={() => navigate('/planner')}>
+                <Button variant="outline-secondary" onClick={() => navigate('/planner', { state: { email: email } })}>
                   플래너
                 </Button>
                 <Button variant="danger" onClick={handleLogout}>

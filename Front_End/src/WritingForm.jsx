@@ -42,11 +42,6 @@ const WritingForm = () => {
     }
   };
 
-  //main페이지로 이동하는 버튼 만들기
-  const handleNavigateToMain = () => {
-    navigate("/main"); // /main 경로로 이동
-  };
-
   return (
     <div className="container mt-4">
       <nav className="navbar navbar-expand-lg navbar-light bg-light mb-4">
@@ -55,13 +50,13 @@ const WritingForm = () => {
           <div className="navbar-nav ms-auto">
             <button
               className="btn btn-outline-primary me-2"
-              onClick={() => navigate("/main")}
+              onClick={() => navigate("/main", { state: { email: email } })}
             >
               홈으로
             </button>
             <button
               className="btn btn-outline-secondary"
-              onClick={() => navigate("/mypage")}
+              onClick={() => navigate("/mypage", { state: { email: email } })}
             >
               마이페이지
             </button>

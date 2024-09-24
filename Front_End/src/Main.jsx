@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Main = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const email = location.state?.email; // email 값을 받아오기
   const mapRef = useRef(null);
   const [map, setMap] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
@@ -13,6 +15,7 @@ const Main = () => {
   const [restaurants, setRestaurants] = useState([]);
   const [error, setError] = useState(null);
 
+  //alert(email);
   useEffect(() => {
     const script = document.createElement("script");
     script.src = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=0nn0y45wnv&submodules=geocoder`;
@@ -168,8 +171,8 @@ const Main = () => {
           <div className="container-fluid">
             <span className="navbar-brand mb-0 h1">네이버 지도 장소 검색</span>
             <div className="navbar-nav ms-auto">
-              <button className="btn btn-outline-primary me-2" onClick={() => navigate('/planner')}>플래너</button>
-              <button className="btn btn-outline-secondary" onClick={() => navigate('/mypage')}>마이페이지</button>
+              <button className="btn btn-outline-primary me-2" onClick={() => navigate('/planner', { state: { email: email } })}>플래너</button>
+              <button className="btn btn-outline-secondary" onClick={() => navigate('/mypage', { state: { email: email } })}>마이페이지</button>
             </div>
           </div>
         </nav>
