@@ -55,7 +55,7 @@ const WritingForm = () => {
               홈으로
             </button>
             <button
-              className="btn btn-outline-secondary"
+              className="btn btn-outline-secondary mt-2"
               onClick={() => navigate("/mypage", { state: { email: email } })}
             >
               마이페이지

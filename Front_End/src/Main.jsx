@@ -169,9 +169,9 @@ const Main = () => {
       <div className="container-fluid px-0">
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <div className="container-fluid">
-            <span className="navbar-brand mb-0 h1">네이버 지도 장소 검색</span>
-            <div className="navbar-nav ms-auto">
-              <button className="btn btn-outline-primary me-2" onClick={() => navigate('/planner', { state: { email: email } })}>플래너</button>
+            <span className="navbar-brand mb-0 h1 ml-1">네이버 지도 장소 검색</span>
+            <div className="navbar-nav ms-auto mt-2">
+              <button className="btn btn-outline-primary me-2 mb-2" onClick={() => navigate('/planner', { state: { email: email } })}>플래너</button>
               <button className="btn btn-outline-secondary" onClick={() => navigate('/mypage', { state: { email: email } })}>마이페이지</button>
             </div>
           </div>
