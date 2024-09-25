@@ -24,4 +24,17 @@
 			, NOW()
 		)
 	</insert>
+	
+	<!-- 글 리스트 들고오는 xml -->
+	<select id="selectPostList" parameterType="map" resultType="com.travel.post.domain.Post">
+		SELECT
+			`id`
+			,`userId`
+			,`subject`
+			,`content`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`post`
+	</select>
 </mapper>
