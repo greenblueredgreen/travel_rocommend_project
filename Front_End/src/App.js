@@ -7,15 +7,10 @@ import Login from "./Login";
 import Main from "./Main";
 import WritingForm from './WritingForm';
 import MyPage from './MyPage';  // MyPage 컴포넌트 import 추가
+import PostList from './PostList';
 
 const App = () => {
-  const [hello, setHello] = useState('');
-
-  useEffect(() => {
-    axios.get('/api/hello')
-      .then(response => setHello(response.data))
-      .catch(error => console.log(error));
-  }, []);
+  
 
   return (
     <Router>
@@ -28,6 +23,7 @@ const App = () => {
           <Route path="/write" element={<WritingForm />} />
           <Route path="/planner" element={<WritingForm />} />  {/* /write를 /planner로 변경 */}
           <Route path="/mypage" element={<MyPage />} />  {/* MyPage 라우트 추가 */}
+          <Route path="/PostList" element={<PostList />} />
         </Routes>
       </div>
     </Router>
