@@ -29,4 +29,9 @@ public class PostBO {
 	public void deletePostByPostId(int postId) {
 		postMapper.deletePostByPostId(postId);
 	}
+	
+	//글 수정 메소드
+	public void updatePostByPostId(int postId, String subject, String content) {
+		postMapper.updatePostByPostId(postId, subject, content);
+	}
 }

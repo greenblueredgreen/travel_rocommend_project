@@ -39,4 +39,24 @@
 		WHERE
 			`userLoginId` = #{userLoginId}
 	</select>
+	
+	<!-- 계획 삭제 xml -->
+	<delete id="deletePostByPostId">
+		DELETE 
+		FROM 
+			`post`
+		WHERE
+			`id` = #{id}
+	</delete>
+	
+	<!-- 글 수정 xml -->
+	<update id="updatePostByPostId" parameterType="map">
+		UPDATE `post`
+		SET
+			`subject` = #{subject}
+			, `content` = #{content}
+			, `updatedAt` = NOW()
+		WHERE
+			`id` = #{postId}
+	</update>
 </mapper>

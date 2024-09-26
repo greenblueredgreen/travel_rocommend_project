@@ -6,9 +6,11 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.travel.post.bo.PostBO;
 
@@ -21,7 +23,7 @@ public class PostRestController {
 	@Autowired
 	private PostBO postBO;
 	
-	//글 생성 
+	//글 생성 api
 	@PostMapping("/create")
 	public Map<String, Object> create(
 			@RequestParam("subject") String subject,
@@ -45,7 +47,7 @@ public class PostRestController {
 		return result;
 	}
 	
-	//글 삭제 
+	//글 삭제 api
 	@DeleteMapping("/delete")
 	public Map<String, Object> delete(
 			@RequestParam("postId") int postId){
@@ -60,4 +62,24 @@ public class PostRestController {
 		
 		return result;
 	}
+	
+	
+	//글 수정 api
+	@PutMapping("/update")
+	public Map<String, Object> update(
+			@RequestParam("postId") int postId,
+			@RequestParam("subject") String subject,
+			@RequestParam("content") String content){
+		
+		//db update
+		postBO.updatePostByPostId(postId, subject, content);
+
+		//응답값
+		Map<String, Object> result = new HashMap<>();
+		result.put("code", 200);
+		result.put("result", "성공");
+		
+		return result;
+	}
+	
 }

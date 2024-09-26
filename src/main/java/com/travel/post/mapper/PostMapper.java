@@ -21,5 +21,11 @@ public interface PostMapper {
 	public List<Post> selectPostList(String userLoginId);
 
 	//글 삭제 mapper
-	public int deletePostByPostId(int postId);
+	public void deletePostByPostId(int id);
+	
+	//글 수정 mapper
+	public void updatePostByPostId(
+			@Param("postId") int postId, 
+			@Param("subject") String subject, 
+			@Param("content") String content);
 }
