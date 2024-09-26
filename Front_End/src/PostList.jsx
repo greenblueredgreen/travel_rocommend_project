@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 function PostList() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedPost, setSelectedPost] = useState(null);
+  const [editMode, setEditMode] = useState(false);
+  const [editedTitle, setEditedTitle] = useState("");
+  const [editedContent, setEditedContent] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
   const email = location.state?.email;
@@ -29,7 +37,9 @@ function PostList() {
     fetchPosts();
   }, []);
 
-  const handleDelete = async (postId) => {
+  // 삭제 함수 api확인!!
+  const handleDelete = async (postId, e) => {
+    e.stopPropagation();
     if (window.confirm("정말로 이 게시물을 삭제하시겠습니까?")) {
       try {
         const response = await fetch(`/post/api/delete/${postId}`, {
@@ -37,6 +47,7 @@ function PostList() {
         });
         if (response.ok) {
           setPosts(posts.filter((post) => post.id !== postId));
+          setShowModal(false);
         } else {
           throw new Error("게시물 삭제에 실패했습니다");
         }
@@ -46,8 +57,53 @@ function PostList() {
     }
   };
 
-  const handleEdit = (postId) => {
-    navigate(`/edit/${postId}`, { state: { email: email } });
+  //수정함수
+  const handleEdit = () => {
+    setEditMode(true);
+    setEditedTitle(selectedPost.title);
+    setEditedContent(selectedPost.content);
+  };
+
+  //수정 후 저장함수 api확인!!
+  const handleSave = async () => {
+    try {
+      const response = await fetch(`/post/api/update/${selectedPost.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: editedTitle,
+          content: editedContent,
+        }),
+      });
+      if (response.ok) {
+        const updatedPosts = posts.map(post =>
+          post.id === selectedPost.id
+            ? { ...post, title: editedTitle, content: editedContent }
+            : post
+        );
+        setPosts(updatedPosts);
+        setSelectedPost({ ...selectedPost, title: editedTitle, content: editedContent });
+        setEditMode(false);
+      } else {
+        throw new Error("게시물 수정에 실패했습니다");
+      }
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  const handleRowClick = (post) => {
+    setSelectedPost(post);
+    setShowModal(true);
+    setEditMode(false);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setSelectedPost(null);
+    setEditMode(false);
   };
 
   if (loading)
@@ -103,30 +159,81 @@ function PostList() {
               <li
                 key={post.id}
                 className="list-group-item d-flex justify-content-between align-items-start"
+                onClick={() => handleRowClick(post)}
+                style={{ cursor: 'pointer' }}
               >
                 <div className="ms-2 me-auto">
                   <div className="fw-bold">{post.title}</div>
-                  {post.content}
+                  {post.content.substring(0, 50)}...
                 </div>
-                <div className="d-flex align-items-center">
-                  <button
-                    className="btn btn-sm btn-outline-primary me-2"
-                    onClick={() => handleEdit(post.id)}
-                  >
-                    수정
-                  </button>
-                  <button
-                    className="btn btn-sm btn-outline-danger"
-                    onClick={() => handleDelete(post.id)}
-                  >
-                    삭제
-                  </button>
-                </div>
+                <button
+                  className="btn btn-sm btn-outline-danger"
+                  onClick={(e) => handleDelete(post.id, e)}
+                >
+                  삭제
+                </button>
               </li>
             ))}
           </ul>
         </div>
       </div>
+
+      <Modal show={showModal} onHide={handleCloseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>{editMode ? "게시물 수정" : selectedPost?.title}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {editMode ? (
+            <Form>
+              <Form.Group className="mb-3">
+                <Form.Label>제목</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={editedTitle}
+                  onChange={(e) => setEditedTitle(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>내용</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={3}
+                  value={editedContent}
+                  onChange={(e) => setEditedContent(e.target.value)}
+                />
+              </Form.Group>
+            </Form>
+          ) : (
+            <>
+              <div className="mb-3">
+                <h5>제목</h5>
+                <p>{selectedPost?.title}</p>
+              </div>
+              <div>
+                <h5>내용</h5>
+                <p>{selectedPost?.content}</p>
+              </div>
+            </>
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          {editMode ? (
+            <Button variant="primary" onClick={handleSave}>
+              저장
+            </Button>
+          ) : (
+            <Button variant="primary" onClick={handleEdit}>
+              수정
+            </Button>
+          )}
+          <Button variant="danger" onClick={() => handleDelete(selectedPost?.id)}>
+            삭제
+          </Button>
+          <Button variant="secondary" onClick={handleCloseModal}>
+            닫기
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }
