@@ -25,5 +25,8 @@ mybatis:
   mapper-locations: mappers/*Mapper.xml
 naver:
   client:
-    id: 0nn0y45wnv
-    secret: qiC2NBDDK6Aih1VJj4iG4qONwYtpyVFdY89vcF7h
+    id: z75e0lcnqe
+    secret: 80HLs9ivYvvrBIlSJocSkk5vhc8EQMSK429IFcxX
+kakao:
+  api:
+    key: 8323252951a97b41155cd927ab433d7c
