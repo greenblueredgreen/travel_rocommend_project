@@ -65,7 +65,7 @@ const MyPage = () => {
                 <Button variant="outline-primary" onClick={() => navigate('/main', { state: { email: email } })}>
                   홈으로
                 </Button>
-                <Button variant="outline-secondary" onClick={() => navigate('/planner', { state: { email: email } })}>
+                <Button variant="outline-secondary" onClick={() => navigate('/PostList', { state: { email: email } })}>
                   플래너
                 </Button>
                 <Button variant="danger" onClick={handleLogout}>

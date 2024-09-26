@@ -14,7 +14,6 @@ const WritingForm = () => {
     setContent("");
   };
 
-  // 저장 버튼 클릭 시 호출되는 함수
   const handleSave = async () => {
     const params = new URLSearchParams({
       subject: subject,
@@ -55,10 +54,16 @@ const WritingForm = () => {
               홈으로
             </button>
             <button
-              className="btn btn-outline-secondary mt-2"
+              className="btn btn-outline-secondary me-2"
               onClick={() => navigate("/mypage", { state: { email: email } })}
             >
               마이페이지
+            </button>
+            <button
+              className="btn btn-outline-info"
+              onClick={() => navigate("/PostList", { state: { email: email } })}
+            >
+              목록으로
             </button>
           </div>
         </div>

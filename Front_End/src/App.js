@@ -20,7 +20,6 @@ const App = () => {
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/main" element={<Main />} />
-          <Route path="/write" element={<WritingForm />} />
           <Route path="/planner" element={<WritingForm />} />  {/* /write를 /planner로 변경 */}
           <Route path="/mypage" element={<MyPage />} />  {/* MyPage 라우트 추가 */}
           <Route path="/PostList" element={<PostList />} />

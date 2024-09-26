@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function PostList() {
   const [posts, setPosts] = useState([]);
@@ -12,9 +12,9 @@ function PostList() {
 
   const fetchPosts = async () => {
     try {
-      const response = await fetch('/post/api/post-list');
+      const response = await fetch(`/post/api/post-list?email=${email}`);
       if (!response.ok) {
-        throw new Error('게시물을 불러오는데 실패했습니다');
+        throw new Error("게시물을 불러오는데 실패했습니다");
       }
       const data = await response.json();
       setPosts(data);
@@ -30,13 +30,15 @@ function PostList() {
   }, []);
 
   const handleDelete = async (postId) => {
-    if (window.confirm('정말로 이 게시물을 삭제하시겠습니까?')) {
+    if (window.confirm("정말로 이 게시물을 삭제하시겠습니까?")) {
       try {
-        const response = await fetch(`/post/api/delete/${postId}`, { method: 'DELETE' });
+        const response = await fetch(`/post/api/delete/${postId}`, {
+          method: "DELETE",
+        });
         if (response.ok) {
-          setPosts(posts.filter(post => post.id !== postId));
+          setPosts(posts.filter((post) => post.id !== postId));
         } else {
-          throw new Error('게시물 삭제에 실패했습니다');
+          throw new Error("게시물 삭제에 실패했습니다");
         }
       } catch (error) {
         setError(error.message);
@@ -48,9 +50,22 @@ function PostList() {
     navigate(`/edit/${postId}`, { state: { email: email } });
   };
 
-  if (loading) return <div className="container mt-4"><div className="spinner-border" role="status"><span className="visually-hidden">로딩중...</span></div></div>;
-  if (error) return <div className="container mt-4 alert alert-danger">에러: {error}</div>;
-  if (posts.length === 0) return <div className="container mt-4 alert alert-info">게시물이 없습니다</div>;
+  if (loading)
+    return (
+      <div className="container mt-4">
+        <div className="spinner-border" role="status">
+          <span className="visually-hidden">로딩중...</span>
+        </div>
+      </div>
+    );
+  if (error)
+    return (
+      <div className="container mt-4 alert alert-danger">에러: {error}</div>
+    );
+  if (posts.length === 0)
+    return (
+      <div className="container mt-4 alert alert-info">게시물이 없습니다</div>
+    );
 
   return (
     <div className="container mt-4">
@@ -72,7 +87,7 @@ function PostList() {
             </button>
             <button
               className="btn btn-success"
-              onClick={() => navigate("/write", { state: { email: email } })}
+              onClick={() => navigate("/planner", { state: { email: email } })}
             >
               글쓰기
             </button>
@@ -84,13 +99,28 @@ function PostList() {
         <div className="card-body">
           <h2 className="card-title mb-4">게시물 목록</h2>
           <ul className="list-group">
-            {posts.map(post => (
-              <li key={post.id} className="list-group-item">
-                <h5 className="mb-1">{post.title}</h5>
-                <p className="mb-1">{post.content}</p>
-                <div className="mt-2">
-                  <button className="btn btn-sm btn-outline-primary me-2" onClick={() => handleEdit(post.id)}>수정</button>
-                  <button className="btn btn-sm btn-outline-danger" onClick={() => handleDelete(post.id)}>삭제</button>
+            {posts.map((post) => (
+              <li
+                key={post.id}
+                className="list-group-item d-flex justify-content-between align-items-start"
+              >
+                <div className="ms-2 me-auto">
+                  <div className="fw-bold">{post.title}</div>
+                  {post.content}
+                </div>
+                <div className="d-flex align-items-center">
+                  <button
+                    className="btn btn-sm btn-outline-primary me-2"
+                    onClick={() => handleEdit(post.id)}
+                  >
+                    수정
+                  </button>
+                  <button
+                    className="btn btn-sm btn-outline-danger"
+                    onClick={() => handleDelete(post.id)}
+                  >
+                    삭제
+                  </button>
                 </div>
               </li>
             ))}
