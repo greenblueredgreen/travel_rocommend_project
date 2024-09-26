@@ -4,6 +4,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Calendar from 'react-calendar'; // 캘린더 컴포넌트 import
+import 'react-calendar/dist/Calendar.css'; // 캘린더 스타일 import
+import './App.css';
 
 function PostList() {
   //여행 계획 리스트
@@ -247,6 +250,14 @@ function PostList() {
           </Button>
         </Modal.Footer>
       </Modal>
+
+      {/* 캘린더 추가 시작 */}
+      <div className="calendar-container mt-4">
+        <h3 className="mb-4">캘린더</h3>
+        <Calendar />
+      </div>
+      {/* 캘린더 추가 끝 */}
+
     </div>
   );
 }
