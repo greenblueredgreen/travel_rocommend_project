@@ -1,5 +1,6 @@
 package com.travel.post.bo;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,5 +23,10 @@ public class PostBO {
 	//글 리스트 들고오는 메소드
 	public List<Post> getPostList(String userLoginId) {
 		return postMapper.selectPostList(userLoginId);
+	}
+	
+	//글 리스트 삭제 메소드
+	public void deletePostByPostId(int postId) {
+		postMapper.deletePostByPostId(postId);
 	}
 }

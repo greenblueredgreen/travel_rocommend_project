@@ -19,4 +19,7 @@ public interface PostMapper {
 	
 	//글 리스트 들고오는 mapper
 	public List<Post> selectPostList(String userLoginId);
+
+	//글 삭제 mapper
+	public int deletePostByPostId(int postId);
 }

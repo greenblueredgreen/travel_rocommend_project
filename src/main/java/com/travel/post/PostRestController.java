@@ -1,21 +1,18 @@
 package com.travel.post;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.travel.post.bo.PostBO;
-import com.travel.post.domain.Post;
+
+import jakarta.servlet.http.HttpSession;
 
 @RequestMapping("/post")
 @RestController
@@ -41,6 +38,22 @@ public class PostRestController {
 		postBO.addPost(userId, userLoginId, subject, content);
 		
 		// 응답값
+		Map<String, Object> result = new HashMap<>();
+		result.put("code", 200);
+		result.put("result", "성공");
+		
+		return result;
+	}
+	
+	//글 삭제 
+	@DeleteMapping("/delete")
+	public Map<String, Object> delete(
+			@RequestParam("postId") int postId){
+		
+		//DB delete - 글번호와 글쓴이 번호로 삭제 
+		postBO.deletePostByPostId(postId);
+		
+		//응답값
 		Map<String, Object> result = new HashMap<>();
 		result.put("code", 200);
 		result.put("result", "성공");
