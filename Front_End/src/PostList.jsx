@@ -38,22 +38,26 @@ function PostList() {
     fetchPosts();
   }, []);
 
-  // 삭제 함수 api확인!!
+  // 계획 삭제 함수
   const handleDelete = async (postId, e) => {
-    e.stopPropagation();
+    if (e) e.stopPropagation();
     if (window.confirm("정말로 이 게시물을 삭제하시겠습니까?")) {
       try {
-        const response = await fetch(`/post/api/delete/${postId}`, {
+        const response = await fetch(`/post/delete?postId=${postId}`, {
           method: "DELETE",
         });
-        if (response.ok) {
+        
+        // 서버에서 응답 확인
+        const data = await response.json();
+        if (response.ok && data.code === 200) {
+          // 게시물 목록에서 삭제된 게시물 필터링
           setPosts(posts.filter((post) => post.id !== postId));
-          setShowModal(false);
+          setShowModal(false);  // 모달 닫기
         } else {
-          throw new Error("게시물 삭제에 실패했습니다");
+          throw new Error(data.result || "게시물 삭제에 실패했습니다");
         }
       } catch (error) {
-        setError(error.message);
+        setError(error.message);  // 오류 처리
       }
     }
   };
@@ -61,14 +65,14 @@ function PostList() {
   //수정함수
   const handleEdit = () => {
     setEditMode(true);
-    setEditedTitle(selectedPost.title);
+    setEditedTitle(selectedPost.subject);
     setEditedContent(selectedPost.content);
   };
 
   //수정 후 저장함수 api확인!!
   const handleSave = async () => {
     try {
-      const response = await fetch(`/post/api/update/${selectedPost.id}`, {
+      const response = await fetch(`/post/update?postId=${selectedPost.id}&subject=${encodeURIComponent(editedTitle)}&content=${encodeURIComponent(editedContent)}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -79,15 +83,23 @@ function PostList() {
         }),
       });
       if (response.ok) {
-        const updatedPosts = posts.map(post =>
+        // const updatedPosts = posts.map(post =>
+        //   post.id === selectedPost.id
+        //     ? { ...post, title: editedTitle, content: editedContent }
+        //     : post
+        // );
+        // setPosts(updatedPosts);
+        // setSelectedPost({ ...selectedPost, title: editedTitle, content: editedContent });
+        // setEditMode(false);
+        setPosts(posts.map(post => 
           post.id === selectedPost.id
-            ? { ...post, title: editedTitle, content: editedContent }
+            ? { ...post, subject: editedTitle, content: editedContent } // 수정된 부분
             : post
-        );
-        setPosts(updatedPosts);
-        setSelectedPost({ ...selectedPost, title: editedTitle, content: editedContent });
+        ));
+        setSelectedPost({ ...selectedPost, subject: editedTitle, content: editedContent });
         setEditMode(false);
       } else {
+        const data = await response.json();
         throw new Error("게시물 수정에 실패했습니다");
       }
     } catch (error) {
@@ -164,7 +176,7 @@ function PostList() {
                 style={{ cursor: 'pointer' }}
               >
                 <div className="ms-2 me-auto">
-                  <div className="fw-bold">{post.title}</div>
+                  <div className="fw-bold mb-2 mt-2">{post.subject}</div>
                   {post.content.substring(0, 50)}...
                 </div>
                 <button
@@ -207,11 +219,11 @@ function PostList() {
           ) : (
             <>
               <div className="mb-3">
-                <h5>제목</h5>
-                <p>{selectedPost?.title}</p>
+                <h5 className="mb-3">제목</h5>
+                <p>{selectedPost?.subject}</p>
               </div>
               <div>
-                <h5>내용</h5>
+                <h5 className="mb-3">내용</h5>
                 <p>{selectedPost?.content}</p>
               </div>
             </>
@@ -227,7 +239,7 @@ function PostList() {
               수정
             </Button>
           )}
-          <Button variant="danger" onClick={() => handleDelete(selectedPost?.id)}>
+          <Button variant="danger" onClick={(e) => handleDelete(selectedPost?.id, e)}>
             삭제
           </Button>
           <Button variant="secondary" onClick={handleCloseModal}>
