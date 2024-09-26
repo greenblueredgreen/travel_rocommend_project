@@ -38,7 +38,7 @@ const Login = () => {
       localStorage.setItem('sessionId', response.data.sessionId);
       localStorage.setItem('email', formData.email);
       //alert(formData.email);
-      navigate('/write', { state: { email: formData.email } });
+      navigate('/planner', { state: { email: formData.email } });
       //navigate('/main');  // 메인 페이지로 이동
     } catch (error) {
       console.error('Login failed:', error);  // 에러 처리
