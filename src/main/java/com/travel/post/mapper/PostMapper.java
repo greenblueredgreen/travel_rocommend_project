@@ -18,5 +18,5 @@ public interface PostMapper {
 			@Param("content") String content);
 	
 	//글 리스트 들고오는 mapper
-	public List<Post> selectPostList();
+	public List<Post> selectPostList(String userLoginId);
 }

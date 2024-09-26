@@ -1,13 +1,11 @@
 package com.travel.post;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.travel.post.bo.PostBO;
@@ -22,10 +20,10 @@ public class PostController {
 	
 	// 글 가져오는 RestController
 	@GetMapping("/api/post-list")
-	public List<Post> postListView() {
+	public List<Post> postListView(@RequestParam("email") String userLoginId) {
 		
 		// db조회 - 글목록
-		List<Post> postList = postBO.getPostList();
+		List<Post> postList = postBO.getPostList(userLoginId);
 
 		return postList;
 	}

@@ -20,7 +20,7 @@ public class PostBO {
 	}
 	
 	//글 리스트 들고오는 메소드
-	public List<Post> getPostList() {
-		return postMapper.selectPostList();
+	public List<Post> getPostList(String userLoginId) {
+		return postMapper.selectPostList(userLoginId);
 	}
 }
