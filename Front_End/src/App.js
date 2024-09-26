@@ -8,6 +8,7 @@ import Main from "./Main";
 import WritingForm from './WritingForm';
 import MyPage from './MyPage';  // MyPage 컴포넌트 import 추가
 import PostList from './PostList';
+import MapComponent from "./MapComponent";
 
 const App = () => {
   
@@ -23,6 +24,7 @@ const App = () => {
           <Route path="/planner" element={<WritingForm />} />  {/* /write를 /planner로 변경 */}
           <Route path="/mypage" element={<MyPage />} />  {/* MyPage 라우트 추가 */}
           <Route path="/PostList" element={<PostList />} />
+          <Route path="/map" element={<MapComponent query="검색할 장소" />} />
         </Routes>
       </div>
     </Router>
