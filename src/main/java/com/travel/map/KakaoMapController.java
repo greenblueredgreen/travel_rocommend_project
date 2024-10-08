@@ -16,36 +16,36 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 public class KakaoMapController {
 
-    @Value("${kakao.api.key}")
-    private String kakaoApiKey;
-
-    private final String KAKAO_MAP_URL = "https://dapi.kakao.com/v2/local/search/keyword.json";
-
-    private final RestTemplate restTemplate;
-
-    // Constructor injection
-    public KakaoMapController(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
-    }
-
-    @GetMapping("/api/map/search")
-    public ResponseEntity<String> searchMap(@RequestParam String query) {
-        String url = KAKAO_MAP_URL + "?query=" + query;
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", "KakaoAK " + kakaoApiKey);
-
-        HttpEntity<String> entity = new HttpEntity<>(headers);
-        
-        try {
-            ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
-            
-            if (response.getStatusCode().is2xxSuccessful()) {
-                return ResponseEntity.ok(response.getBody());
-            } else {
-                return ResponseEntity.status(response.getStatusCode()).body("Error: " + response.getBody());
-            }
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
-        }
-    }
+//    @Value("${kakao.api.key}")
+//    private String kakaoApiKey;
+//
+//    private final String KAKAO_MAP_URL = "https://dapi.kakao.com/v2/local/search/keyword.json";
+//
+//    private final RestTemplate restTemplate;
+//
+//    // Constructor injection
+//    public KakaoMapController(RestTemplate restTemplate) {
+//        this.restTemplate = restTemplate;
+//    }
+//
+//    @GetMapping("/api/map/search")
+//    public ResponseEntity<String> searchMap(@RequestParam String query) {
+//        String url = KAKAO_MAP_URL + "?query=" + query;
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.set("Authorization", "KakaoAK " + kakaoApiKey);
+//
+//        HttpEntity<String> entity = new HttpEntity<>(headers);
+//        
+//        try {
+//            ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
+//            
+//            if (response.getStatusCode().is2xxSuccessful()) {
+//                return ResponseEntity.ok(response.getBody());
+//            } else {
+//                return ResponseEntity.status(response.getStatusCode()).body("Error: " + response.getBody());
+//            }
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
+//        }
+//    }
 }

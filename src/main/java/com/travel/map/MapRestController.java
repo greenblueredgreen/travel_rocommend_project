@@ -18,18 +18,18 @@ import com.travel.map.bo.MapService;
 @CrossOrigin(origins = "http://localhost:3000")  // React 앱의 주소
 public class MapRestController {
 
-    private final MapService mapService;
-
-    @Autowired
-    public MapRestController(MapService mapService) {
-        this.mapService = mapService;
-    }
-
-    @GetMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Map<String, Object>> searchPlaces(@RequestParam(value = "query") String query) {
-        Map<String, Object> result = mapService.searchPlaces(query);
-        return ResponseEntity.ok()
-            .contentType(MediaType.APPLICATION_JSON)
-            .body(result);
-    }
+//    private final MapService mapService;
+//
+//    @Autowired
+//    public MapRestController(MapService mapService) {
+//        this.mapService = mapService;
+//    }
+//
+//    @GetMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<Map<String, Object>> searchPlaces(@RequestParam(value = "query") String query) {
+//        Map<String, Object> result = mapService.searchPlaces(query);
+//        return ResponseEntity.ok()
+//            .contentType(MediaType.APPLICATION_JSON)
+//            .body(result);
+//    }
 }
