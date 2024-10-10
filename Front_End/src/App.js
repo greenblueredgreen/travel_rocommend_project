@@ -9,6 +9,7 @@ import WritingForm from './WritingForm';
 import MyPage from './MyPage';  // MyPage 컴포넌트 import 추가
 import PostList from './PostList';
 import MapComponent from "./MapComponent";
+import KakaoMap from './KakaoMap'
 
 const App = () => {
   
@@ -25,6 +26,7 @@ const App = () => {
           <Route path="/mypage" element={<MyPage />} />  {/* MyPage 라우트 추가 */}
           <Route path="/PostList" element={<PostList />} />
           <Route path="/map" element={<MapComponent query="검색할 장소" />} />
+          <Route path="/KakaoMap" element={<KakaoMap />} />
         </Routes>
       </div>
     </Router>
