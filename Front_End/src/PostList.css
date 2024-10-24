@@ -1,0 +1,27 @@
+/* PostList.css */
+.fc {
+    max-width: 100%;
+    font-size: 0.9em;
+  }
+  
+  @media (max-width: 768px) {
+    .fc {
+      font-size: 0.8em;
+    }
+    
+    .fc .fc-toolbar-title {
+      font-size: 1.2em;
+    }
+    
+    .fc .fc-button {
+      padding: 0.2em 0.4em;
+    }
+  }
+  
+  .fc-event {
+    cursor: pointer;
+  }
+  
+  .fc-event:hover {
+    opacity: 0.8;
+  }

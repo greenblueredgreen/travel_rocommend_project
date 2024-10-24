@@ -1,8 +1,14 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useLocation, useNavigate } from "react-router-dom";
+// 상단 import 추가
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const WritingForm = () => {
+  // state 추가
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
   const location = useLocation();
   const navigate = useNavigate();
   const email = location.state?.email;
@@ -12,13 +18,17 @@ const WritingForm = () => {
   const handleClear = () => {
     setSubject("");
     setContent("");
+    setStartDate(new Date());
+    setEndDate(new Date());
   };
 
   const handleSave = async () => {
     const params = new URLSearchParams({
-      subject: subject,
-      content: content,
-      email: email,
+      subject,
+      content,
+      email,
+      startDate: startDate.toISOString(),
+      endDate: endDate.toISOString(),
     });
 
     try {
@@ -72,7 +82,6 @@ const WritingForm = () => {
       <div className="card">
         <div className="card-body">
           <h2 className="card-title mb-4">나의 여행 계획</h2>
-
           <div className="mb-3">
             <input
               type="text"
@@ -82,7 +91,28 @@ const WritingForm = () => {
               onChange={(e) => setSubject(e.target.value)}
             />
           </div>
-
+          {/* return 문 내부의 form에 DatePicker 추가*/}
+          <div className="row mb-3">
+            <div className="col-md-6 mb-3 mb-md-0">
+              <label className="form-label">시작일</label>
+              <DatePicker
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+                className="form-control"
+                dateFormat="yyyy/MM/dd"
+              />
+            </div>
+            <div className="col-md-6">
+              <label className="form-label">종료일</label>
+              <DatePicker
+                selected={endDate}
+                onChange={(date) => setEndDate(date)}
+                className="form-control"
+                dateFormat="yyyy/MM/dd"
+                minDate={startDate}
+              />
+            </div>
+          </div>
           <div className="mb-3">
             <textarea
               rows="10"
@@ -92,7 +122,6 @@ const WritingForm = () => {
               onChange={(e) => setContent(e.target.value)}
             />
           </div>
-
           <div className="d-flex justify-content-between">
             <button className="btn btn-secondary" onClick={handleClear}>
               초기화
