@@ -79,14 +79,14 @@ function PostList() {
   //수정함수
   const handleEdit = () => {
     setEditMode(true);
-    setEditedTitle(selectedPost.title);
+    setEditedTitle(selectedPost.subject);
     setEditedContent(selectedPost.content);
   };
 
   //수정 후 저장함수 api확인!!
   const handleSave = async () => {
     try {
-      const response = await fetch(`/post/api/update/${selectedPost.id}`, {
+      const response = await fetch(`/post/update?postId=${selectedPost.id}&subject=${encodeURIComponent(editedTitle)}&content=${encodeURIComponent(editedContent)}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -99,13 +99,13 @@ function PostList() {
       if (response.ok) {
         const updatedPosts = posts.map((post) =>
           post.id === selectedPost.id
-            ? { ...post, title: editedTitle, content: editedContent }
+            ? { ...post, subject: editedTitle, content: editedContent }
             : post
         );
         setPosts(updatedPosts);
         setSelectedPost({
           ...selectedPost,
-          title: editedTitle,
+          subject: editedTitle,
           content: editedContent,
         });
         setEditMode(false);
