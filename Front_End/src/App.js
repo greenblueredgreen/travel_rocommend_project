@@ -10,6 +10,7 @@ import MyPage from './MyPage';  // MyPage 컴포넌트 import 추가
 import PostList from './PostList';
 import MapComponent from "./MapComponent";
 import KakaoMap from './KakaoMap'
+import LunchRecommendation from './LunchRecommendation'
 
 const App = () => {
   
@@ -27,6 +28,7 @@ const App = () => {
           <Route path="/PostList" element={<PostList />} />
           <Route path="/map" element={<MapComponent query="검색할 장소" />} />
           <Route path="/KakaoMap" element={<KakaoMap />} />
+          <Route path="/LunchRecommendation" element={<LunchRecommendation />} />
         </Routes>
       </div>
     </Router>
