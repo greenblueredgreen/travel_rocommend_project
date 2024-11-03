@@ -10,6 +10,7 @@ import java.util.List;
 public class LunchService {
 
     /**
+     * 현재 위치에서 맛집 추천이 된다
      * 좌표 기준 음식점 데이터 조회
      * 파라미터 순서는 x, y 순서로 넘겨줘야 데이터 리턴 받을 수 있음
      * @param longitude 경도 -> x
