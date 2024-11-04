@@ -1,73 +1,83 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 
-const LunchRecommendation = () => {
-    const [lunchList, setLunchList] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState('');
+function LunchRecommendations() {
+    const [lunchList, setLunchList] = useState([]); // 추천 목록을 저장하는 상태
+    const selectCount = 1; // 추천받을 페이지 수 (필요에 따라 변경 가능)
 
-    const getLunchRecommendations = () => {
-        if ("geolocation" in navigator) { // geolocation 사용 가능
-            setLoading(true);
-            setError('');
-            navigator.geolocation.getCurrentPosition(async (position) => {
-                const latitude = position.coords.latitude;
-                const longitude = position.coords.longitude;
-
-                try {
-                    // Spring Boot API 호출
-                    const response = await axios.get(`http://localhost:8080/lunch?latitude=${latitude}&longitude=${longitude}`);
-                    setLunchList(response.data); // 응답 데이터로 lunchList 업데이트
-                } catch (err) {
-                    console.error(err);
-                    setError("맛집 정보를 가져오는 데 실패했습니다."); // 오류 메시지 설정
-                } finally {
-                    setLoading(false);
+    const fetchLunchRecommendations = async (latitude, longitude) => {
+        setLunchList([]); // 초기화
+    
+        for (let i = 1; i <= selectCount; i++) {
+            try {
+                const response = await fetch('/lunch/recommend', {  // API 경로 확인
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ latitude, longitude, page: i }),
+                });
+                
+                if (!response.ok) {
+                    // 상태 코드와 응답 텍스트를 추가로 확인
+                    console.error(`HTTP 상태 코드: ${response.status}`);
+                    const errorText = await response.text();
+                    console.error("응답 내용:", errorText);
+                    throw new Error("추천 목록을 가져오는데 실패했습니다.");
                 }
-            }, (error) => {
+    
+                const result = await response.json();
+                //console.log("Fetched result:", result);
+                //alert(result);
+                //alert(JSON.stringify(result, null, 2)); // 객체를 보기 좋게 출력
+            
+                const items = result.documents || [];
+                setLunchList((prevList) => [...prevList, ...items]);
+            } catch (error) {
                 console.error(error);
-                setError("위치 정보를 가져오는 데 실패했습니다."); // 오류 메시지 설정
-                setLoading(false);
-            }, {
-                enableHighAccuracy: true,
-                timeout: Infinity,
-                maximumAge: 0
-            });
-        } else { // geolocation 사용 불가능
-            setError('geolocation 사용 불가능');
+                alert('추천 목록을 가져오는데 실패했습니다.');
+            }
+        }
+    };
+    
+
+    // 사용자의 위치 정보를 받아와 추천 목록을 요청하는 함수
+    const handleRecommendClick = () => {
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const { latitude, longitude } = position.coords;
+                    //alert(latitude);
+                    //alert(longitude);
+                    fetchLunchRecommendations(latitude, longitude);
+                },
+                (error) => {
+                    console.error(error);
+                    alert('위치 정보를 가져오는데 실패했습니다.');
+                },
+                { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+            );
+        } else {
+            alert('지오로케이션을 지원하지 않는 브라우저입니다.');
         }
     };
 
     return (
         <div>
-            <input type="hidden" id="select_count" value="3" />
-            <button onClick={getLunchRecommendations} disabled={loading}>
-                {loading ? '로딩 중...' : '맛집 추천'}
-            </button>
-
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-
+            <button onClick={handleRecommendClick}>맛집 추천</button>
             <div id="lunch_list">
                 {lunchList.length > 0 ? (
                     lunchList.map((item, index) => (
-                        <div key={index} className="lunch_list_content" 
-                             data-address={item.address_name}
-                             data-url={item.place_url}
-                             data-x={item.x}
-                             data-y={item.y}
-                             data-phone={item.phone}>
-                            <h3>{item.place_name}</h3>
-                            <p>{item.address_name}</p>
-                            <p>{item.phone}</p>
+                        <div key={index} className="lunch_list_content">
+                            <h3>{item.place_name || "이름 없음"}</h3> {/* place_name이 없을 경우를 대비 */}
+                            <p>주소: {item.address_name}</p>
                             <a href={item.place_url} target="_blank" rel="noopener noreferrer">자세히 보기</a>
+                            <p>전화번호: {item.phone || "없음"}</p>
                         </div>
                     ))
                 ) : (
-                    <p>맛집 정보를 찾을 수 없습니다.</p>
+                    <p>추천 목록이 없습니다.</p>
                 )}
             </div>
         </div>
     );
-};
+}
 
-export default LunchRecommendation;
+export default LunchRecommendations;
