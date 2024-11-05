@@ -14,23 +14,25 @@ import com.travel.map.bo.LunchService;
 
 @RestController
 @RequestMapping("/lunch")
-@CrossOrigin(origins = "http://localhost:3000") 
+@CrossOrigin(origins = "http://localhost:3000")
 public class HomeRestController {
-	
+
 	@Autowired
-    private LunchService lunchService; // LunchService 주입
+	private LunchService lunchService; // LunchService 주입
 
-    //카카오 API 키
-    private String appKey= "8323252951a97b41155cd927ab433d7c";
-    
-    //react로 보내는 post코드
-    @PostMapping("/recommend")
-    public ResponseEntity<String> getLunchRecommendations(@RequestBody Map<String, String> request) {
-        String latitude = request.get("latitude");
-        String longitude = request.get("longitude");
-        String page = request.get("page");
-        String appKey = "8323252951a97b41155cd927ab433d7c";  // Kakao API Key
+	// 카카오 API 키
+	private String appKey = "8323252951a97b41155cd927ab433d7c";
 
-        return lunchService.getSearchLunchList(longitude, latitude, page, "15", appKey);
-    }
+	// react로 보내는 post코드
+	@PostMapping("/recommend")
+	public ResponseEntity<String> getLunchRecommendations(@RequestBody Map<String, String> request) {
+		String latitude = request.get("latitude");
+		String longitude = request.get("longitude");
+		String page = request.get("page");
+		String appKey = "8323252951a97b41155cd927ab433d7c"; // Kakao API Key
+
+		//알고보니 latitude와 longtiude 파라미터 위치가 바껴서 들어가 현재 위치 맛집이 출력이 안됨.
+		//파라미터 순서에 주의해서 작성.
+		return lunchService.getSearchLunchList(latitude, longitude, page, "15", appKey);
+	}
 }
