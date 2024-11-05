@@ -64,16 +64,48 @@ const NaverMap = () => {
           return alert('올바른 주소를 입력해주세요.');
         }
         const item = response.v2.addresses[0];
+        const latitude = item.y;  // 위도 변수에 담기
+        const longitude = item.x;  // 경도 변수에 담기
+
         const newMapList = [
           ...mapList,
           {
             address: item.roadAddress,
-            latitude: item.y,
-            longitude: item.x,
+            latitude: latitude,
+            longitude: longitude,
           },
         ];
+
         setMapList(newMapList);
         moveMap(item.y, item.x);
+
+
+        //TO_DO
+        // fetch('/recommend/findAddress', {
+        //   method: 'POST',
+        //   headers: {
+        //     'Content-Type': 'application/json',
+        //   },
+        //   body: JSON.stringify({
+        //     latitude: latitude,
+        //     longitude: longitude,
+        //     page: '1',
+        //   }),
+        // })
+        //   .then((response) => {
+        //     if (!response.ok) {
+        //       throw new Error('네트워크 응답이 좋지 않습니다.');
+        //     }
+        //     return response.json();
+        //   })
+        //   .then((data) => {
+        //     console.log(data); // 추천 맛집 목록 처리
+        //   })
+        //   .catch((error) => {
+        //     console.error('문제가 발생했습니다:', error);
+        //   });
+
+
       }
     );
   };
