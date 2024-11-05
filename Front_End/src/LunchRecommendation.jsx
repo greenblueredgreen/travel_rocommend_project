@@ -1,8 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 function LunchRecommendations() {
     const [lunchList, setLunchList] = useState([]); // 추천 목록을 저장하는 상태
     const selectCount = 1; // 추천받을 페이지 수 (필요에 따라 변경 가능)
+
+    // Kakao 지도 API 스크립트를 로드하는 useEffect
+    useEffect(() => {
+        const script = document.createElement('script');
+        script.src = "//dapi.kakao.com/v2/maps/sdk.js?appkey=8323252951a97b41155cd927ab433d7c&libraries=services";
+        script.async = true;
+        document.head.appendChild(script);
+
+        // 스크립트 로드 후에 처리할 로직이 있다면 추가 가능
+        return () => {
+            document.head.removeChild(script); // 컴포넌트 언마운트 시 스크립트 제거
+        };
+    }, []);
+
 
     const fetchLunchRecommendations = async (latitude, longitude) => {
         setLunchList([]); // 초기화
