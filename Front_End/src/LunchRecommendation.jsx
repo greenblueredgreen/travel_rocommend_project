@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from 'react-bootstrap/Button'; 
 
 function LunchRecommendations() {
     const [lunchList, setLunchList] = useState([]); // 추천 목록을 저장하는 상태
@@ -75,15 +77,15 @@ function LunchRecommendations() {
 
     return (
         <div>
-            <button onClick={handleRecommendClick}>맛집 추천</button>
-            <div id="lunch_list">
+            <button class="mt-3 btn btn-info" type="button" onClick={handleRecommendClick}>맛집 추천</button>
+            <div id="lunch_list" class="mt-3">
                 {lunchList.length > 0 ? (
                     lunchList.map((item, index) => (
                         <div key={index} className="lunch_list_content">
                             <h3>{item.place_name || "이름 없음"}</h3> {/* place_name이 없을 경우를 대비 */}
-                            <p>주소: {item.address_name}</p>
-                            <a href={item.place_url} target="_blank" rel="noopener noreferrer">자세히 보기</a>
-                            <p>전화번호: {item.phone || "없음"}</p>
+                            <p class="mt-3">주소 : {item.address_name}</p>
+                            <a href={item.place_url} target="_blank" rel="noopener noreferrer">자세히 보기 - 사이트 연결</a>
+                            <p class="mt-2">전화번호: {item.phone || "없음"}</p>
                         </div>
                     ))
                 ) : (
