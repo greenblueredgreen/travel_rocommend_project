@@ -56,7 +56,7 @@ const MyPage = () => {
               <h2 className="text-center mb-4">마이페이지</h2>
               <Row className="mb-3">
                 <Col sm={3}>
-                  <strong>이메일:</strong>
+                  <strong>이메일 :</strong>
                 </Col>
                 <Col sm={9}>{email}</Col>
               </Row>

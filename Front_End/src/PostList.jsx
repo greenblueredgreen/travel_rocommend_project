@@ -27,6 +27,7 @@ function PostList() {
   const email = location.state?.email;
 
   const fetchPosts = async () => {
+
     try {
       const response = await fetch(`/post/api/post-list?email=${email}`);
       if (!response.ok) {
@@ -45,12 +46,16 @@ function PostList() {
     fetchPosts();
   }, []);
 
+  const formatDateString = (dateString) => {
+    return dateString ? dateString : "잘못된 날짜"; // 날짜 문자열을 그대로 사용
+  };
+
   // calendar events 변환 함수 추가
   const calendarEvents = posts.map((post) => ({
     id: post.id,
     title: post.subject,
-    start: post.startDate,
-    end: post.endDate,
+    start: post.startDate, // 문자열 그대로 사용
+    end: post.endDate, // 문자열 그대로 사용
     extendedProps: {
       content: post.content,
     },
@@ -85,6 +90,7 @@ function PostList() {
 
   //수정 후 저장함수 api확인!!
   const handleSave = async () => {
+
     try {
       const response = await fetch(`/post/update?postId=${selectedPost.id}&subject=${encodeURIComponent(editedTitle)}&content=${encodeURIComponent(editedContent)}`, {
         method: "PUT",
@@ -212,8 +218,8 @@ function PostList() {
                         <div className="ms-2 me-auto">
                           <div className="fw-bold">{post.subject}</div>
                           <small className="text-muted">
-                            {new Date(post.startDate).toLocaleDateString()} - 
-                            {new Date(post.endDate).toLocaleDateString()}
+                            {/* 날짜 */}
+                            <p>{post.startDate ? post.startDate.slice(0, 10) : "날짜 없음"} - {post.endDate ? post.endDate.slice(0, 10) : "날짜 없음"}</p>
                           </small>
                           <div className="text-muted small mt-1">
                             {post.content.length > 50

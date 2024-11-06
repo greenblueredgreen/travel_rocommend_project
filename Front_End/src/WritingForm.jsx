@@ -31,6 +31,8 @@ const WritingForm = () => {
       endDate: endDate.toISOString(),
     });
 
+    //alert(startDate);
+
     try {
       const response = await fetch(
         `http://localhost:8080/post/create?${params.toString()}`,
