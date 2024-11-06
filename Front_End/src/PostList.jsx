@@ -46,10 +46,6 @@ function PostList() {
     fetchPosts();
   }, []);
 
-  const formatDateString = (dateString) => {
-    return dateString ? dateString : "잘못된 날짜"; // 날짜 문자열을 그대로 사용
-  };
-
   // calendar events 변환 함수 추가
   const calendarEvents = posts.map((post) => ({
     id: post.id,
@@ -86,13 +82,15 @@ function PostList() {
     setEditMode(true);
     setEditedTitle(selectedPost.subject);
     setEditedContent(selectedPost.content);
+    setEditedStartDate(selectedPost.startDate);
+    setEditedEndDate(selectedPost.endDate);
   };
 
   //수정 후 저장함수 api확인!!
   const handleSave = async () => {
 
     try {
-      const response = await fetch(`/post/update?postId=${selectedPost.id}&subject=${encodeURIComponent(editedTitle)}&content=${encodeURIComponent(editedContent)}`, {
+      const response = await fetch(`/post/update?postId=${selectedPost.id}&subject=${encodeURIComponent(editedTitle)}&content=${encodeURIComponent(editedContent)}&startDate=${encodeURIComponent(editedStartDate)}&endDate=${encodeURIComponent(editedEndDate)}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -100,12 +98,14 @@ function PostList() {
         body: JSON.stringify({
           title: editedTitle,
           content: editedContent,
+          startDate: editedStartDate,
+          endDate: editedEndDate
         }),
       });
       if (response.ok) {
         const updatedPosts = posts.map((post) =>
           post.id === selectedPost.id
-            ? { ...post, subject: editedTitle, content: editedContent }
+            ? { ...post, subject: editedTitle, content: editedContent,startDate: editedStartDate, endDate: editedEndDate}
             : post
         );
         setPosts(updatedPosts);
@@ -113,6 +113,8 @@ function PostList() {
           ...selectedPost,
           subject: editedTitle,
           content: editedContent,
+          startDate: editedStartDate,
+          endDate: editedEndDate
         });
         setEditMode(false);
       } else {
