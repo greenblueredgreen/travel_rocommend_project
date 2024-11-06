@@ -15,4 +15,6 @@ public class Post {
 	private String content;
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
+	private String startDate;
+	private String endDate;
 }

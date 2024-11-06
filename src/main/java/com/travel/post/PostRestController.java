@@ -1,5 +1,7 @@
 package com.travel.post;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,11 +12,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.travel.post.bo.PostBO;
-
-import jakarta.servlet.http.HttpSession;
 
 @RequestMapping("/post")
 @RestController
@@ -28,16 +27,16 @@ public class PostRestController {
 	public Map<String, Object> create(
 			@RequestParam("subject") String subject,
 			@RequestParam("content") String content, 
-			@RequestParam("email") String email) {
+			@RequestParam("email") String email,
+			@RequestParam("startDate") String startDate,
+			@RequestParam("endDate") String endDate) {
 
-		// 글쓴이 번호를 session에서 꺼낸다.
-		//int userId = (int)session.getAttribute("userId");
 		String userLoginId = email;
 		int userId = 1;
-	
+		
 		// DB insert
-		// 글쓴이 번호, 로그인 id, 제목, 글내용, 첨부파일
-		postBO.addPost(userId, userLoginId, subject, content);
+		// 글쓴이 번호, 로그인 id, 제목, 글내용
+		postBO.addPost(userId, userLoginId, subject, content, startDate, endDate);
 		
 		// 응답값
 		Map<String, Object> result = new HashMap<>();
@@ -69,10 +68,12 @@ public class PostRestController {
 	public Map<String, Object> update(
 			@RequestParam("postId") int postId,
 			@RequestParam("subject") String subject,
-			@RequestParam("content") String content){
+			@RequestParam("content") String content,
+			@RequestParam("startDate") String startDate,
+			@RequestParam("endDate") String endDate){
 		
 		//db update
-		postBO.updatePostByPostId(postId, subject, content);
+		postBO.updatePostByPostId(postId, subject, content, startDate, endDate);
 
 		//응답값
 		Map<String, Object> result = new HashMap<>();

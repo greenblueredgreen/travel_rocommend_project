@@ -1,5 +1,6 @@
 package com.travel.post.mapper;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -15,7 +16,9 @@ public interface PostMapper {
 			@Param("userId") int userId, 
 			@Param("userLoginId") String userLoginId,
 			@Param("subject") String subject, 
-			@Param("content") String content);
+			@Param("content") String content,
+			@Param("startDate") String startDate,
+			@Param("endDate") String endDate);
 	
 	//글 리스트 들고오는 mapper
 	public List<Post> selectPostList(String userLoginId);
@@ -27,5 +30,7 @@ public interface PostMapper {
 	public void updatePostByPostId(
 			@Param("postId") int postId, 
 			@Param("subject") String subject, 
-			@Param("content") String content);
+			@Param("content") String content,
+			@Param("startDate") String startDate,
+			@Param("endDate") String endDate);
 }

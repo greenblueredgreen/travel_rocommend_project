@@ -1,6 +1,7 @@
 package com.travel.post.bo;
 
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,8 @@ public class PostBO {
 	private PostMapper postMapper;
 	
 	//글 추가 메소드
-	public void addPost(int userId, String userLoginId, String subject, String content) {
-		postMapper.insertPost(userId, userLoginId, subject, content);
+	public void addPost(int userId, String userLoginId, String subject, String content, String startDate, String endDate) {
+		postMapper.insertPost(userId, userLoginId, subject, content, startDate, endDate);
 	}
 	
 	//글 리스트 들고오는 메소드
@@ -31,7 +32,7 @@ public class PostBO {
 	}
 	
 	//글 수정 메소드
-	public void updatePostByPostId(int postId, String subject, String content) {
-		postMapper.updatePostByPostId(postId, subject, content);
+	public void updatePostByPostId(int postId, String subject, String content, String startDate, String endDate) {
+		postMapper.updatePostByPostId(postId, subject, content, startDate, endDate);
 	}
 }

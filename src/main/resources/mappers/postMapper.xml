@@ -13,6 +13,8 @@
 			,`content`
 			,`createdAt`
 			,`updatedAt`
+			, `startDate`
+			, `endDate`
 		)
 		VALUES
 		(
@@ -22,6 +24,8 @@
 			, #{content}
 			, NOW()
 			, NOW()
+			, #{startDate}
+			, #{endDate}
 		)
 	</insert>
 	
@@ -34,6 +38,8 @@
 			,`content`
 			,`createdAt`
 			,`updatedAt`
+			, `startDate`
+			, `endDate`
 		FROM
 			`post`
 		WHERE
@@ -56,6 +62,8 @@
 			`subject` = #{subject}
 			, `content` = #{content}
 			, `updatedAt` = NOW()
+			, `startDate` = #{startDate}
+			, `endDate` = #{endDate}
 		WHERE
 			`id` = #{postId}
 	</update>
