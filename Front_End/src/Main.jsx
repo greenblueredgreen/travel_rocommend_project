@@ -172,8 +172,8 @@ const Main = () => {
           <div className="container-fluid">
             <span className="navbar-brand mb-0 h1 ml-1">네이버 지도 장소 검색</span>
             <div className="navbar-nav ms-auto mt-2">
-              <button className="btn btn-outline-primary me-2 mb-2" onClick={() => navigate('/PostList', { state: { email: email } })}>플래너</button>
-              <button className="btn btn-outline-secondary" onClick={() => navigate('/mypage', { state: { email: email } })}>마이페이지</button>
+              <button className="btn btn-outline-primary mr-3" onClick={() => navigate('/PostList', { state: { email: email } })}>플래너</button>
+              <button className="btn btn-outline-secondary ml-3" onClick={() => navigate('/mypage', { state: { email: email } })}>마이페이지</button>
             </div>
           </div>
         </nav>
@@ -247,6 +247,11 @@ const Main = () => {
                 ))}
               </ul>
             </div>
+          </div>
+
+          <div>
+            <button className="btn btn-outline-primary me-2 mb-2" onClick={() => navigate('/map', { state: { email: email } })}>주소로 근처 맛집 찾기</button>
+            <button className="btn btn-outline-primary me-2 mb-2" onClick={() => navigate('/LunchRecommendation', { state: { email: email } })}>현재 위치로 근처 맛집 찾기</button>
           </div>
         </div>
       </div>
