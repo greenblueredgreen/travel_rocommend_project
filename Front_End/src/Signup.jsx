@@ -37,17 +37,34 @@ const Signup = () => {
     }
   };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   if (validateForm()) {
+  //     try {
+  //       const response = await axios.post('http://localhost:8080/user/sign-up', {
+  //         email: formData.email,
+  //         password: formData.password
+  //       });
+  //       console.log('회원가입 성공:', response.data);
+  //       navigate('/login', { state: { message: '회원가입이 완료되었습니다. 로그인해주세요.' } });
+  //     } catch (error) {
+  //       console.error('회원가입 실패:', error);
+  //       if (error.response && error.response.data) {
+  //         setErrors({ submit: `회원가입 실패: ${error.response.data.message || '알 수 없는 오류가 발생했습니다.'}` });
+  //       } else {
+  //         setErrors({ submit: '회원가입에 실패했습니다. 다시 시도해주세요.' });
+  //       }
+  //     }
+  //   }
+  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
       try {
-        const response = await axios.post('http://localhost:8080/user/sign-up', {
-          loginId: formData.email,
-          email: formData.email,
-          password: formData.password
-        }, {
-          headers: {
-            'Content-Type': 'application/json'
+        const response = await axios.post('http://localhost:8080/user/sign-up', null, {
+          params: {
+            email: formData.email,
+            password: formData.password
           }
         });
         console.log('회원가입 성공:', response.data);
@@ -62,7 +79,7 @@ const Signup = () => {
       }
     }
   };
-
+  
   
 
   return (

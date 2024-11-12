@@ -62,7 +62,7 @@ function PostList() {
     e.stopPropagation();
     if (window.confirm("정말로 이 게시물을 삭제하시겠습니까?")) {
       try {
-        const response = await fetch(`/post/delete/${postId}`, {
+        const response = await fetch(`/post/delete?postId=${postId}`, {
           method: "DELETE",
         });
         if (response.ok) {
