@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import { Container, Row, Col, Card, Button, ProgressBar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./MBTITest.css";
@@ -205,6 +205,8 @@ const MBTITest = () => {
     }
   }, [currentQuestion, shuffledQuestions]);
 
+  const progressPercentage = Math.round(((currentQuestion + 1) / shuffledQuestions.length) * 100);
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -300,6 +302,7 @@ const MBTITest = () => {
               </Col>
             ))}
           </Row>
+            <ProgressBar now={progressPercentage} label={`${progressPercentage}%`} className="mb-3 mt-5" />
         </Col>
       </Row>
     </Container>
